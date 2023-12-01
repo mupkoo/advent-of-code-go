@@ -21,11 +21,11 @@ jobs:
       with:
         go-version: '1.21'
 
-    # Loop over all 2023 folders and add a black input.txt file
+    # Loop over all 2023 folders and add a blank input.txt file
     - name: Create input.txt files
       run: |
         for d in 2023/*; do
-          touch $d/input.txt
+          echo "blank" > $d/input.txt
         done
 
     - name: Vet
