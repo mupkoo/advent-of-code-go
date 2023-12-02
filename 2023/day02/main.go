@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	"flag"
 	"fmt"
-	"regexp"
 	"strings"
 
 	"github.com/mupkoo/advent-of-code-go/cast"
@@ -46,24 +45,19 @@ func part1(input string) int {
 	for _, line := range parsed {
 		segments := strings.Split(line, ":")
 		day := cast.ToInt(strings.Replace(segments[0], "Game ", "", 1))
-		sets := strings.Split(segments[1], ";")
+		sets := strings.FieldsFunc(segments[1], splitter)
 
 		answer += day
 
-	setsLoop:
 		for _, set := range sets {
-			items := strings.Split(strings.Trim(set, " "), ",")
+			count_color := strings.Split(strings.Trim(set, " "), " ")
+			count := cast.ToInt(count_color[0])
+			color := count_color[1]
 
-			for _, item := range items {
-				count_color := strings.Split(strings.Trim(item, " "), " ")
-				count := cast.ToInt(count_color[0])
-				color := count_color[1]
-
-				// only 12 red cubes, 13 green cubes, and 14 blue cubes
-				if (color == "red" && count > 12) || (color == "green" && count > 13) || (color == "blue" && count > 14) {
-					answer -= day
-					break setsLoop
-				}
+			// only 12 red cubes, 13 green cubes, and 14 blue cubes
+			if (color == "red" && count > 12) || (color == "green" && count > 13) || (color == "blue" && count > 14) {
+				answer -= day
+				break
 			}
 		}
 	}
@@ -74,7 +68,6 @@ func part1(input string) int {
 func part2(input string) int {
 	parsed := parseInput(input)
 	answer := 0
-	re := regexp.MustCompile(`(;|,)+`)
 
 	for _, line := range parsed {
 		segments := strings.Split(line, ":")
@@ -84,7 +77,7 @@ func part2(input string) int {
 			"blue":  0,
 		}
 
-		for _, cube := range re.Split(segments[1], -1) {
+		for _, cube := range strings.FieldsFunc(segments[1], splitter) {
 			count_color := strings.Split(strings.Trim(cube, " "), " ")
 			count := cast.ToInt(count_color[0])
 			color := count_color[1]
@@ -102,4 +95,8 @@ func part2(input string) int {
 
 func parseInput(input string) (ans []string) {
 	return strings.Split(input, "\n")
+}
+
+func splitter(r rune) bool {
+	return r == ';' || r == ','
 }
