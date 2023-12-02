@@ -8,6 +8,8 @@ help: ## Show this help
 check-aoc-cookie:  ## ensures $AOC_SESSION_COOKIE env var is set
 	@ test $${AOC_SESSION_COOKIE?env var not set}
 
+bootstrap: skeleton input prompt ## create the skeleton for the day and get the input and prompt
+
 skeleton: ## make skeleton main(_test).go files, optional: $DAY and $YEAR
 	@ if [[ -n $$DAY && -n $$YEAR ]]; then \
 		go run scripts/cmd/skeleton/main.go -day $(DAY) -year $(YEAR) ; \
