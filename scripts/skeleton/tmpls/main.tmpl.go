@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mupkoo/advent-of-code-go/cast"
 	"github.com/mupkoo/advent-of-code-go/util"
 )
 
@@ -49,9 +48,6 @@ func part2(input string) int {
 	return 0
 }
 
-func parseInput(input string) (ans []int) {
-	for _, line := range strings.Split(input, "\n") {
-		ans = append(ans, cast.ToInt(line))
-	}
-	return ans
+func parseInput(input string) []string {
+	return strings.Split(input, "\n")
 }
