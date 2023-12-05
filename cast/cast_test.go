@@ -15,6 +15,18 @@ func TestToInt(t *testing.T) {
 	}
 }
 
+func TestToInts(t *testing.T) {
+	if got := cast.ToInts("123", "456", "789"); got[0] != 123 || got[1] != 456 || got[2] != 789 {
+		t.Errorf("cast.Ints(123, 456, 789) = %v, want [123, 456, 789]", got)
+	}
+}
+
+func TestSplitToInts(t *testing.T) {
+	if got := cast.SplitToInts("123,456,789", ","); got[0] != 123 || got[1] != 456 || got[2] != 789 {
+		t.Errorf("cast.SplitToInts(123,456,789, ',') = %v, want [123, 456, 789]", got)
+	}
+}
+
 func TestToString(t *testing.T) {
 	byteTests := []struct {
 		name  string

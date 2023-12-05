@@ -6,11 +6,12 @@ package cast
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // ToInt will case a given arg into an int type.
 // Supported types are:
-//    - string
+//   - string
 func ToInt(arg interface{}) int {
 	var val int
 	switch arg.(type) {
@@ -26,11 +27,25 @@ func ToInt(arg interface{}) int {
 	return val
 }
 
+func ToInts(args ...string) []int {
+	var result []int
+
+	for _, arg := range args {
+		result = append(result, ToInt(arg))
+	}
+
+	return result
+}
+
+func SplitToInts(input string, sep string) []int {
+	return ToInts(strings.Split(input, sep)...)
+}
+
 // ToString will case a given arg into an int type.
 // Supported types are:
-//    - int
-//    - byte
-//    - rune
+//   - int
+//   - byte
+//   - rune
 func ToString(arg interface{}) string {
 	var str string
 	switch arg.(type) {
