@@ -20,16 +20,21 @@ var example = `1000
 10000`
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  24000,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  70509,
+		})
 	}
 
 	for _, tt := range tests {
@@ -42,16 +47,21 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  45000,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  208567,
+		})
 	}
 
 	for _, tt := range tests {
@@ -61,4 +71,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }

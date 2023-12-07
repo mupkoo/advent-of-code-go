@@ -12,16 +12,21 @@ Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
 Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11`
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  13,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  22193,
+		})
 	}
 
 	for _, tt := range tests {
@@ -34,16 +39,21 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  30,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  5625994,
+		})
 	}
 
 	for _, tt := range tests {
@@ -53,4 +63,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }

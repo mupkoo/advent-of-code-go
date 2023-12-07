@@ -5,11 +5,7 @@ import (
 )
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name: "example",
 			input: `1asb2
@@ -18,6 +14,15 @@ func Test_part1(t *testing.T) {
 			sda2das`,
 			want: 12 + 34 + 24 + 22,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  55712,
+		})
 	}
 
 	for _, tt := range tests {
@@ -30,11 +35,7 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name: "example",
 			input: `two1nine
@@ -48,6 +49,15 @@ func Test_part2(t *testing.T) {
 		},
 	}
 
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  55413,
+		})
+	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := part2(tt.input); got != tt.want {
@@ -55,4 +65,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }

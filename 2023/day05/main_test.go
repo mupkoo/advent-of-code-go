@@ -39,16 +39,21 @@ humidity-to-location map:
 56 93 4`
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  35,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  510109797,
+		})
 	}
 
 	for _, tt := range tests {
@@ -61,17 +66,22 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  46,
 		},
 	}
+
+	// Do not run this at all as it takes too long
+	// if input != "blank" {
+	// 	tests = append(tests, testCase{
+	// 		name:  "input",
+	// 		input: input,
+	// 		want:  449820,
+	// 	})
+	// }
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -80,4 +90,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }
