@@ -24,7 +24,7 @@ jobs:
     # Loop over all 2023 folders and add a blank input.txt file
     - name: Create input.txt files
       run: |
-        for d in {2022,2023}/*; do
+        for d in {2015,2022,2023}/*; do
           echo "blank" > $d/input.txt
         done
 
