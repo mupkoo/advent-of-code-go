@@ -7,16 +7,21 @@ import (
 var example = ``
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  0,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  0,
+		})
 	}
 
 	for _, tt := range tests {
@@ -29,16 +34,21 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  0,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  0,
+		})
 	}
 
 	for _, tt := range tests {
@@ -48,4 +58,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }

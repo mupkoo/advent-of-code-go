@@ -11,16 +11,21 @@ KTJJT 220
 QQQJA 483`
 
 func Test_part1(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
 			want:  6440,
 		},
+	}
+
+	// Do not run this in CI
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  250951660,
+		})
 	}
 
 	for _, tt := range tests {
@@ -33,11 +38,7 @@ func Test_part1(t *testing.T) {
 }
 
 func Test_part2(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  int
-	}{
+	tests := []testCase{
 		{
 			name:  "example",
 			input: example,
@@ -73,6 +74,14 @@ func Test_part2(t *testing.T) {
 		},
 	}
 
+	if input != "blank" {
+		tests = append(tests, testCase{
+			name:  "input",
+			input: input,
+			want:  251481660,
+		})
+	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := part2(tt.input); got != tt.want {
@@ -80,4 +89,10 @@ func Test_part2(t *testing.T) {
 			}
 		})
 	}
+}
+
+type testCase struct {
+	name  string
+	input string
+	want  int
 }
