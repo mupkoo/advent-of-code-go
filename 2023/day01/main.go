@@ -104,7 +104,7 @@ func part2(input string) int {
 			}
 
 			tempLastIndex := strings.LastIndex(line, k)
-			if tempLastIndex != -1 && tempLastIndex > lastIndex {
+			if tempLastIndex > lastIndex {
 				lastIndex = tempLastIndex
 				last = v
 			}
