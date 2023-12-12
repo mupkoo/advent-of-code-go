@@ -49,6 +49,12 @@ func TestToString(t *testing.T) {
 	}
 }
 
+func TestToStrings(t *testing.T) {
+	if got := cast.ToStrings(123, 456, 789); got[0] != "123" || got[1] != "456" || got[2] != "789" {
+		t.Errorf("cast.Ints(123, 456, 789) = %v, want [123, 456, 789]", got)
+	}
+}
+
 func TestToASCIIConstants(t *testing.T) {
 	if cast.ASCIICodeCapA != 65 {
 		t.Errorf("Expected cast.ASCIICodeCapA to be 65, got %d", cast.ASCIICodeCapA)

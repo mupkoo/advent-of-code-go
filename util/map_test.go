@@ -2,6 +2,7 @@ package util
 
 import (
 	"reflect"
+	"slices"
 	"testing"
 )
 
@@ -15,6 +16,7 @@ func TestGetMapValues(t *testing.T) {
 
 		want := []int{1, 2, 3}
 		got := GetMapValues(input)
+		slices.Sort(got)
 
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("GetMapValues(%v) = %v, want %v", input, got, want)
@@ -30,6 +32,7 @@ func TestGetMapValues(t *testing.T) {
 
 		want := []string{"1", "2", "3"}
 		got := GetMapValues(input)
+		slices.Sort(got)
 
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("GetMapValues(%v) = %v, want %v", input, got, want)

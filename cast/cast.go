@@ -62,6 +62,16 @@ func ToString(arg interface{}) string {
 	return str
 }
 
+func ToStrings(args ...int) []string {
+	var result []string
+
+	for _, arg := range args {
+		result = append(result, ToString(arg))
+	}
+
+	return result
+}
+
 const (
 	ASCIICodeCapA   = int('A') // 65
 	ASCIICodeCapZ   = int('Z') // 65
