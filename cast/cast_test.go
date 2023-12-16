@@ -33,6 +33,7 @@ func TestToString(t *testing.T) {
 		input interface{}
 		want  string
 	}{
+		{"string", "a", "a"},
 		{"byte", byte('a'), "a"},
 		{"byte", byte('x'), "x"},
 		{"int", 1234, "1234"},

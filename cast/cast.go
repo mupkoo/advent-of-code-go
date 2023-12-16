@@ -14,10 +14,10 @@ import (
 //   - string
 func ToInt(arg interface{}) int {
 	var val int
-	switch arg.(type) {
+	switch arg := arg.(type) {
 	case string:
 		var err error
-		val, err = strconv.Atoi(arg.(string))
+		val, err = strconv.Atoi(arg)
 		if err != nil {
 			panic("error converting string to int " + err.Error())
 		}
@@ -48,17 +48,19 @@ func SplitToInts(input string, sep string) []int {
 //   - rune
 func ToString(arg interface{}) string {
 	var str string
-	switch arg.(type) {
+	switch arg := arg.(type) {
+	case string:
+		str = arg
 	case int:
-		str = strconv.Itoa(arg.(int))
+		str = strconv.Itoa(arg)
 	case byte:
-		b := arg.(byte)
-		str = string(rune(b))
+		str = string(rune(arg))
 	case rune:
-		str = string(arg.(rune))
+		str = string(arg)
 	default:
 		panic(fmt.Sprintf("unhandled type for string casting %T", arg))
 	}
+
 	return str
 }
 
@@ -82,17 +84,16 @@ const (
 // ToASCIICode returns the ascii code of a given input
 func ToASCIICode(arg interface{}) int {
 	var asciiVal int
-	switch arg.(type) {
+	switch arg := arg.(type) {
 	case string:
-		str := arg.(string)
-		if len(str) != 1 {
+		if len(arg) != 1 {
 			panic("can only convert ascii Code for string of length 1")
 		}
-		asciiVal = int(str[0])
+		asciiVal = int(arg[0])
 	case byte:
-		asciiVal = int(arg.(byte))
+		asciiVal = int(arg)
 	case rune:
-		asciiVal = int(arg.(rune))
+		asciiVal = int(arg)
 	}
 
 	return asciiVal
