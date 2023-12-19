@@ -21,6 +21,12 @@ func ToInt(arg interface{}) int {
 		if err != nil {
 			panic("error converting string to int " + err.Error())
 		}
+	case rune:
+		var err error
+		val, err = strconv.Atoi(string(arg))
+		if err != nil {
+			panic("error converting string to int " + err.Error())
+		}
 	default:
 		panic(fmt.Sprintf("unhandled type for int casting %T", arg))
 	}

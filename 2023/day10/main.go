@@ -51,8 +51,6 @@ func part2(input string) int {
 	input = strings.Replace(input, "S", pointToChar(from, grid), 1)
 	area := 0
 
-	fmt.Println(input)
-
 	for row, line := range strings.Split(input, "\n") {
 		inside := false
 		var riding rune
